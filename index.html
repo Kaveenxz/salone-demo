@@ -1,0 +1,1497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LUZH · Hair that feels like you</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <style>
+    /* ---------- RESET & GLOBAL ---------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: #f7f5f2;
+      color: #1e2b2b;
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      font-size: 1rem;
+      letter-spacing: 0.01em;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, .serif {
+      font-family: 'Playfair Display', serif;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      color: #0d1f1f;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button, .btn {
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      border: none;
+      background: none;
+      transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2.5rem;
+    }
+
+    @media (max-width: 700px) {
+      .container {
+        padding: 0 1.25rem;
+      }
+    }
+
+    /* ---------- NAVBAR ---------- */
+    .navbar {
+      padding: 1.5rem 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background-color: transparent;
+      transition: all 0.4s ease;
+    }
+
+    .navbar.scrolled {
+      background-color: rgba(247, 245, 242, 0.96);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(13, 31, 31, 0.06);
+      padding: 1rem 2.5rem;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.7rem;
+      font-weight: 500;
+      color: #f7f5f2;
+      letter-spacing: -0.03em;
+      transition: color 0.4s ease;
+    }
+
+    .navbar.scrolled .logo {
+      color: #0d1f1f;
+    }
+
+    .nav-center {
+      display: flex;
+      gap: 2.8rem;
+      align-items: center;
+      font-size: 0.72rem;
+      font-weight: 400;
+      color: rgba(247, 245, 242, 0.85);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      transition: color 0.4s ease;
+    }
+
+    .navbar.scrolled .nav-center {
+      color: #2c3e3e;
+    }
+
+    .nav-center a {
+      position: relative;
+      padding-bottom: 4px;
+    }
+
+    .nav-center a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background-color: currentColor;
+      transition: width 0.3s ease;
+    }
+
+    .nav-center a:hover::after {
+      width: 100%;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .nav-book {
+      background-color: #f7f5f2;
+      color: #0d1f1f;
+      padding: 0.7rem 1.6rem;
+      border-radius: 30px;
+      font-size: 0.7rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      border: 1px solid #f7f5f2;
+      transition: all 0.4s ease;
+    }
+
+    .navbar.scrolled .nav-book {
+      background-color: #0d1f1f;
+      color: #f7f5f2;
+      border-color: #0d1f1f;
+    }
+
+    .nav-book:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 20px -8px rgba(13, 31, 31, 0.4);
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 1.5rem;
+      background: none;
+      color: #f7f5f2;
+      line-height: 1;
+      transition: color 0.4s ease;
+    }
+
+    .navbar.scrolled .menu-toggle {
+      color: #0d1f1f;
+    }
+
+    @media (max-width: 950px) {
+      .nav-center {
+        display: none;
+      }
+      .menu-toggle {
+        display: block;
+      }
+      .navbar {
+        padding: 1.2rem 1.5rem;
+      }
+      .navbar.scrolled {
+        padding: 1rem 1.5rem;
+      }
+    }
+
+    /* ---------- HERO (REBUILT) ---------- */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      min-height: 700px;
+      max-height: 1000px;
+      overflow: hidden;
+      background-color: #0d1f1f;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .hero-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 25%;
+    }
+
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(13, 31, 31, 0.55) 0%, rgba(13, 31, 31, 0.15) 30%, rgba(13, 31, 31, 0.4) 70%, rgba(13, 31, 31, 0.92) 100%),
+        linear-gradient(90deg, rgba(13, 31, 31, 0.6) 0%, transparent 60%);
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2.5rem 6rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .hero-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.35em;
+      color: rgba(247, 245, 242, 0.75);
+      margin-bottom: 1.8rem;
+      font-weight: 400;
+    }
+
+    .hero-label::before {
+      content: '';
+      width: 40px;
+      height: 1px;
+      background-color: rgba(247, 245, 242, 0.5);
+    }
+
+    .hero h1 {
+      font-size: clamp(3.2rem, 8.5vw, 6.5rem);
+      margin-bottom: 1.8rem;
+      line-height: 0.98;
+      color: #f7f5f2;
+      font-weight: 400;
+      max-width: 900px;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      font-weight: 400;
+      color: #e8dcc8;
+    }
+
+    .hero-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .hero p {
+      font-size: 1.05rem;
+      color: rgba(247, 245, 242, 0.8);
+      max-width: 420px;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .btn-primary {
+      background-color: #f7f5f2;
+      color: #0d1f1f;
+      padding: 1.1rem 2.4rem;
+      border-radius: 40px;
+      font-weight: 500;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      border: 1px solid #f7f5f2;
+      text-transform: uppercase;
+    }
+
+    .btn-primary:hover {
+      background-color: #ffffff;
+      border-color: #ffffff;
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px -12px rgba(0, 0, 0, 0.5);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: #f7f5f2;
+      padding: 1.1rem 2rem;
+      border-radius: 40px;
+      font-weight: 500;
+      font-size: 0.72rem;
+      border: 1px solid rgba(247, 245, 242, 0.4);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .btn-secondary:hover {
+      border-color: #f7f5f2;
+      background-color: rgba(247, 245, 242, 0.1);
+    }
+
+    @media (max-width: 700px) {
+      .hero {
+        height: 92vh;
+        min-height: 620px;
+      }
+      .hero-inner {
+        padding: 0 1.25rem 3rem;
+      }
+      .hero-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.8rem;
+      }
+      .hero-cta {
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .btn-primary, .btn-secondary {
+        text-align: center;
+        justify-content: center;
+      }
+    }
+
+    /* ---------- MARQUEE ---------- */
+    .marquee {
+      overflow: hidden;
+      white-space: nowrap;
+      padding: 1.6rem 0;
+      background-color: #f7f5f2;
+      border-bottom: 1px solid rgba(13, 31, 31, 0.06);
+    }
+
+    .marquee-inner {
+      display: inline-block;
+      animation: marquee 35s linear infinite;
+    }
+
+    .marquee-inner span {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.95rem;
+      font-style: italic;
+      color: #5e6e6e;
+      margin: 0 1.8rem;
+      letter-spacing: 0.03em;
+    }
+
+    .marquee-inner span::after {
+      content: '·';
+      margin-left: 1.8rem;
+      opacity: 0.4;
+    }
+
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ---------- SOCIAL PROOF ---------- */
+    .social-proof {
+      padding: 2.4rem 0;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      border-bottom: 1px solid rgba(13, 31, 31, 0.06);
+    }
+
+    .proof-item {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.82rem;
+      color: #2c3e3e;
+    }
+
+    .proof-item strong {
+      font-weight: 600;
+      color: #0d1f1f;
+    }
+
+    .stars {
+      color: #0d1f1f;
+      letter-spacing: 2px;
+      font-size: 0.8rem;
+    }
+
+    .social-line {
+      font-size: 0.82rem;
+      color: #5e6e6e;
+      font-style: italic;
+    }
+
+    @media (max-width: 600px) {
+      .social-proof {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.8rem;
+      }
+    }
+
+    /* ---------- SECTION TAGS ---------- */
+    .section-tag {
+      font-size: 0.62rem;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      color: #8a9a9a;
+      margin-bottom: 0.8rem;
+      font-weight: 500;
+    }
+
+    /* ---------- GALLERY ---------- */
+    .gallery {
+      padding: 6rem 0 4rem;
+    }
+
+    .gallery-top {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 2rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .gallery-top h2 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 400;
+    }
+
+    .gallery-top h2 em {
+      font-style: italic;
+      color: #5e6e6e;
+    }
+
+    .gallery-sub {
+      color: #5e6e6e;
+      font-size: 0.92rem;
+      max-width: 380px;
+      line-height: 1.6;
+    }
+
+    .gallery-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .gallery-filters span {
+      cursor: pointer;
+      padding: 0.5rem 1.3rem;
+      border-radius: 30px;
+      border: 1px solid rgba(13, 31, 31, 0.12);
+      color: #5e6e6e;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      transition: all 0.25s ease;
+    }
+
+    .gallery-filters span:hover {
+      border-color: #0d1f1f;
+      color: #0d1f1f;
+    }
+
+    .gallery-filters .active {
+      background-color: #0d1f1f;
+      color: #f7f5f2;
+      border-color: #0d1f1f;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.2rem;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 2px;
+      aspect-ratio: 3 / 4;
+      background-color: #eae7e2;
+      cursor: pointer;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1);
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.06);
+    }
+
+    .gallery-label {
+      position: absolute;
+      bottom: 1rem;
+      left: 1rem;
+      background: rgba(13, 31, 31, 0.85);
+      color: #f7f5f2;
+      font-size: 0.58rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      padding: 0.35rem 0.9rem;
+      border-radius: 20px;
+      backdrop-filter: blur(4px);
+      opacity: 0;
+      transform: translateY(6px);
+      transition: all 0.3s ease;
+    }
+
+    .gallery-item:hover .gallery-label {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .gallery-item.ba::after {
+      content: "B/A";
+      position: absolute;
+      top: 0.8rem;
+      right: 0.8rem;
+      font-size: 0.55rem;
+      background: rgba(247, 245, 242, 0.92);
+      color: #0d1f1f;
+      padding: 0.25rem 0.6rem;
+      border-radius: 20px;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+    }
+
+    @media (max-width: 900px) {
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .gallery-grid {
+        gap: 0.7rem;
+      }
+    }
+
+    /* ============================================ */
+    /* ---------- SERVICES (COMPLETE REBUILD) ---------- */
+    /* ============================================ */
+
+    .services {
+      padding: 7rem 0;
+      background-color: #0d1f1f;
+      color: #f7f5f2;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .services::before {
+      content: '';
+      position: absolute;
+      top: -30%;
+      right: -10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(232, 220, 200, 0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .services-head {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 2rem;
+      margin-bottom: 4rem;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid rgba(247, 245, 242, 0.12);
+    }
+
+    .services-head-left {
+      max-width: 600px;
+    }
+
+    .services-head .section-tag {
+      color: rgba(232, 220, 200, 0.7);
+    }
+
+    .services-head h2 {
+      font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+      color: #f7f5f2;
+      font-weight: 400;
+      line-height: 1.05;
+    }
+
+    .services-head h2 em {
+      font-style: italic;
+      color: #e8dcc8;
+    }
+
+    .services-head-right p {
+      color: rgba(247, 245, 242, 0.6);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      max-width: 380px;
+      font-weight: 300;
+    }
+
+    /* Service list — editorial menu style */
+    .services-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .service-row {
+      display: grid;
+      grid-template-columns: 80px 1fr 1.2fr auto;
+      align-items: center;
+      gap: 2rem;
+      padding: 2.2rem 0;
+      border-bottom: 1px solid rgba(247, 245, 242, 0.1);
+      position: relative;
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      cursor: pointer;
+    }
+
+    .service-row::before {
+      content: '';
+      position: absolute;
+      left: -2.5rem;
+      right: -2.5rem;
+      top: 0;
+      bottom: 0;
+      background: rgba(247, 245, 242, 0.03);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      z-index: 0;
+      border-radius: 8px;
+    }
+
+    .service-row:hover::before {
+      opacity: 1;
+    }
+
+    .service-row > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .service-row:hover {
+      padding-left: 1.5rem;
+    }
+
+    .service-row-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.9rem;
+      color: rgba(232, 220, 200, 0.5);
+      font-style: italic;
+      letter-spacing: 0.05em;
+    }
+
+    .service-row-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.3rem, 2.5vw, 1.9rem);
+      font-weight: 400;
+      color: #f7f5f2;
+      line-height: 1.2;
+      transition: color 0.3s ease;
+    }
+
+    .service-row:hover .service-row-title {
+      color: #e8dcc8;
+    }
+
+    .service-row-desc {
+      font-size: 0.88rem;
+      color: rgba(247, 245, 242, 0.55);
+      line-height: 1.65;
+      font-weight: 300;
+      max-width: 400px;
+    }
+
+    .service-row-action {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 0.68rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: rgba(247, 245, 242, 0.7);
+      white-space: nowrap;
+      transition: color 0.3s ease, gap 0.3s ease;
+    }
+
+    .service-row:hover .service-row-action {
+      color: #e8dcc8;
+      gap: 1.2rem;
+    }
+
+    .service-row-action svg {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.5;
+      transition: transform 0.3s ease;
+    }
+
+    .service-row:hover .service-row-action svg {
+      transform: translateX(4px);
+    }
+
+    /* Service image preview on hover — desktop only */
+    .service-preview {
+      position: fixed;
+      width: 280px;
+      height: 360px;
+      border-radius: 4px;
+      overflow: hidden;
+      pointer-events: none;
+      opacity: 0;
+      transform: scale(0.9);
+      transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      z-index: 50;
+      box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.6);
+    }
+
+    .service-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .service-preview.active {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    @media (max-width: 1000px) {
+      .service-row {
+        grid-template-columns: 50px 1fr auto;
+        gap: 1.5rem;
+      }
+      .service-row-desc {
+        display: none;
+      }
+      .service-preview {
+        display: none;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .services {
+        padding: 5rem 0;
+      }
+      .services-head {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+      }
+      .service-row {
+        grid-template-columns: 1fr auto;
+        gap: 1rem;
+        padding: 1.8rem 0;
+      }
+      .service-row-num {
+        display: none;
+      }
+      .service-row-title {
+        font-size: 1.2rem;
+      }
+      .service-row-action span {
+        display: none;
+      }
+    }
+
+    /* ---------- WHY LUZH ---------- */
+    .why-luzh {
+      padding: 7rem 0;
+    }
+
+    .why-top {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 2rem;
+      margin-bottom: 4rem;
+    }
+
+    .why-top h2 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 400;
+      max-width: 600px;
+    }
+
+    .why-top h2 em {
+      font-style: italic;
+      color: #5e6e6e;
+    }
+
+    .why-top p {
+      color: #5e6e6e;
+      font-size: 0.95rem;
+      max-width: 340px;
+      line-height: 1.7;
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border-top: 1px solid rgba(13, 31, 31, 0.1);
+    }
+
+    .why-item {
+      padding: 2.5rem 2rem 2.5rem 0;
+      border-right: 1px solid rgba(13, 31, 31, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .why-item:last-child {
+      border-right: none;
+    }
+
+    .why-item:not(:first-child) {
+      padding-left: 2rem;
+    }
+
+    .why-item .number {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-style: italic;
+      color: #0d1f1f;
+      opacity: 0.3;
+      margin-bottom: 1.5rem;
+    }
+
+    .why-item h4 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.8rem;
+      color: #0d1f1f;
+    }
+
+    .why-item p {
+      color: #5e6e6e;
+      font-size: 0.88rem;
+      line-height: 1.65;
+    }
+
+    @media (max-width: 900px) {
+      .why-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .why-item {
+        padding: 2rem 1.5rem 2rem 0 !important;
+        border-bottom: 1px solid rgba(13, 31, 31, 0.1);
+      }
+      .why-item:nth-child(2n) {
+        border-right: none;
+      }
+      .why-item:not(:first-child) {
+        padding-left: 1.5rem;
+      }
+      .why-item:nth-child(3),
+      .why-item:nth-child(4) {
+        border-bottom: none;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .why-grid {
+        grid-template-columns: 1fr;
+      }
+      .why-item {
+        border-right: none !important;
+        padding: 2rem 0 !important;
+      }
+      .why-item:last-child {
+        border-bottom: none;
+      }
+    }
+
+    /* ---------- INSTAGRAM ---------- */
+    .insta-section {
+      padding: 6rem 0;
+      background-color: #f7f5f2;
+    }
+
+    .insta-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 2.5rem;
+      gap: 1rem;
+    }
+
+    .insta-header h2 {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 400;
+    }
+
+    .insta-btn {
+      font-size: 0.7rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      border: 1px solid rgba(13, 31, 31, 0.25);
+      padding: 0.8rem 2rem;
+      border-radius: 40px;
+      color: #0d1f1f;
+      transition: all 0.3s ease;
+    }
+
+    .insta-btn:hover {
+      background: #0d1f1f;
+      color: #f7f5f2;
+      border-color: #0d1f1f;
+      transform: translateY(-2px);
+    }
+
+    .insta-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.2rem;
+    }
+
+    .insta-item {
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      border-radius: 3px;
+      background-color: #eae7e2;
+      position: relative;
+    }
+
+    .insta-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s ease;
+    }
+
+    .insta-item:hover img {
+      transform: scale(1.06);
+    }
+
+    @media (max-width: 600px) {
+      .insta-grid {
+        gap: 0.6rem;
+      }
+      .insta-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    /* ---------- TESTIMONIALS ---------- */
+    .testimonials {
+      padding: 7rem 0;
+    }
+
+    .testimonials h2 {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 400;
+      margin-bottom: 3.5rem;
+    }
+
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3rem;
+    }
+
+    .testimonial-card {
+      border-top: 1px solid rgba(13, 31, 31, 0.12);
+      padding-top: 2rem;
+      transition: border-color 0.3s ease;
+    }
+
+    .testimonial-card:hover {
+      border-top-color: #0d1f1f;
+    }
+
+    .testimonial-stars {
+      color: #0d1f1f;
+      font-size: 0.8rem;
+      letter-spacing: 3px;
+      margin-bottom: 1.2rem;
+    }
+
+    .testimonial-text {
+      font-size: 1.05rem;
+      color: #1e2b2b;
+      margin-bottom: 1.5rem;
+      font-style: italic;
+      line-height: 1.7;
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
+    }
+
+    .testimonial-name {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #8a9a9a;
+    }
+
+    @media (max-width: 800px) {
+      .testimonial-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+    }
+
+    /* ---------- BOOKING CTA ---------- */
+    .booking-cta {
+      padding: 8rem 0;
+      text-align: center;
+      background-color: #0d1f1f;
+      color: #f7f5f2;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .booking-cta::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(232, 220, 200, 0.05) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .booking-cta .section-tag {
+      color: rgba(232, 220, 200, 0.6);
+      margin-bottom: 1.5rem;
+    }
+
+    .booking-cta h2 {
+      font-size: clamp(2.4rem, 6.5vw, 4.2rem);
+      color: #f7f5f2;
+      margin-bottom: 2.5rem;
+      font-weight: 400;
+      position: relative;
+      line-height: 1.05;
+    }
+
+    .booking-cta h2 em {
+      font-style: italic;
+      color: #e8dcc8;
+    }
+
+    .booking-cta .btn-primary {
+      font-size: 0.75rem;
+      padding: 1.3rem 3.2rem;
+      position: relative;
+    }
+
+    /* ---------- FOOTER ---------- */
+    .footer {
+      padding: 2.5rem 0;
+      border-top: 1px solid rgba(13, 31, 31, 0.06);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.75rem;
+      color: #8a9a9a;
+      background-color: #f7f5f2;
+      gap: 1rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .footer-links a:hover {
+      color: #0d1f1f;
+    }
+
+    /* ---------- SCROLL REVEAL ---------- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="logo">LUZH</div>
+    <div class="nav-center">
+      <a href="#">Home</a>
+      <a href="#">Services</a>
+      <a href="#">Our Work</a>
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+    </div>
+    <div class="nav-right">
+      <a href="#" class="nav-book">Book Now</a>
+      <button class="menu-toggle" aria-label="Menu">☰</button>
+    </div>
+  </nav>
+
+  <!-- HERO (REBUILT) -->
+  <header class="hero">
+    <div class="hero-bg">
+      <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=2400&auto=format&fit=crop" alt="LUZH hair transformation">
+    </div>
+    <div class="hero-inner">
+      <div class="hero-label">Salon Luzh · Est. 2019</div>
+      <h1>Hair that feels<br><em>like you.</em></h1>
+      <div class="hero-bottom">
+        <p>Professional hair transformations and beauty services — tailored, editorial, and effortlessly you.</p>
+        <div class="hero-cta">
+          <a href="#" class="btn-primary">Book an Appointment</a>
+          <a href="#" class="btn-secondary">Explore Our Work</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MARQUEE -->
+  <div class="marquee">
+    <div class="marquee-inner">
+      <span>Precision Cuts</span>
+      <span>Dimensional Colour</span>
+      <span>Balayage</span>
+      <span>Bridal Styling</span>
+      <span>Treatments</span>
+      <span>Precision Cuts</span>
+      <span>Dimensional Colour</span>
+      <span>Balayage</span>
+      <span>Bridal Styling</span>
+      <span>Treatments</span>
+    </div>
+  </div>
+
+  <!-- SOCIAL PROOF -->
+  <div class="container social-proof">
+    <div class="proof-item">
+      <span class="stars">★★★★★</span>
+      <span><strong>4.9</strong> · 180+ reviews</span>
+    </div>
+    <div class="proof-item">
+      <strong>12.4k</strong> <span>Instagram followers</span>
+    </div>
+    <div class="social-line">Trusted by clients for hair transformations & beauty</div>
+  </div>
+
+  <!-- TRANSFORMATION GALLERY -->
+  <section class="gallery container">
+    <div class="gallery-top">
+      <div>
+        <div class="section-tag">Real transformations</div>
+        <h2>Editorial <em>work.</em></h2>
+      </div>
+      <p class="gallery-sub">Before / after & signature looks — haircuts, colour, styling, bridal.</p>
+    </div>
+    <div class="gallery-filters">
+      <span class="active">All</span>
+      <span>Haircuts</span>
+      <span>Colour</span>
+      <span>Styling</span>
+      <span>Bridal</span>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item ba reveal">
+        <img src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?q=80&w=2069&auto=format&fit=crop" alt="Balayage transformation">
+        <span class="gallery-label">Balayage</span>
+      </div>
+      <div class="gallery-item reveal">
+        <img src="https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?q=80&w=1974&auto=format&fit=crop" alt="Precision haircut">
+        <span class="gallery-label">Haircut</span>
+      </div>
+      <div class="gallery-item ba reveal">
+        <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=2069&auto=format&fit=crop" alt="Colour transformation">
+        <span class="gallery-label">Colour</span>
+      </div>
+      <div class="gallery-item reveal">
+        <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?q=80&w=2069&auto=format&fit=crop" alt="Bridal updo">
+        <span class="gallery-label">Bridal</span>
+      </div>
+      <div class="gallery-item reveal">
+        <img src="https://images.unsplash.com/photo-1605497788044-5a32c7078486?q=80&w=1974&auto=format&fit=crop" alt="Styling">
+        <span class="gallery-label">Styling</span>
+      </div>
+      <div class="gallery-item ba reveal">
+        <img src="https://images.unsplash.com/photo-1560869713-7d0a29430803?q=80&w=2070&auto=format&fit=crop" alt="Gloss treatment">
+        <span class="gallery-label">Gloss</span>
+      </div>
+      <div class="gallery-item reveal">
+        <img src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?q=80&w=2069&auto=format&fit=crop" alt="Lived-in colour">
+        <span class="gallery-label">Colour</span>
+      </div>
+      <div class="gallery-item reveal">
+        <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=2069&auto=format&fit=crop" alt="Textured cut">
+        <span class="gallery-label">Haircut</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- SERVICES (COMPLETE REBUILD) -->
+  <!-- ============================================ -->
+  <section class="services">
+    <div class="container">
+      <div class="services-head">
+        <div class="services-head-left">
+          <div class="section-tag">What we do</div>
+          <h2>Services crafted<br><em>around you.</em></h2>
+        </div>
+        <div class="services-head-right">
+          <p>From precision cuts to dimensional colour, every service is tailored to your hair's unique texture, tone, and lifestyle — so your look grows out as beautifully as it starts.</p>
+        </div>
+      </div>
+
+      <div class="services-list">
+        <div class="service-row" data-preview="https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?q=80&w=800&auto=format&fit=crop">
+          <div class="service-row-num">01</div>
+          <div class="service-row-title">Haircuts & Styling</div>
+          <div class="service-row-desc">Precision cuts and effortless styling that suit your texture and face shape.</div>
+          <div class="service-row-action">
+            <span>View Service</span>
+            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+
+        <div class="service-row" data-preview="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=800&auto=format&fit=crop">
+          <div class="service-row-num">02</div>
+          <div class="service-row-title">Hair Colour</div>
+          <div class="service-row-desc">Rich, dimensional colour — from glossy brunettes to soft lived-in blondes.</div>
+          <div class="service-row-action">
+            <span>Book Now</span>
+            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+
+        <div class="service-row" data-preview="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?q=80&w=800&auto=format&fit=crop">
+          <div class="service-row-num">03</div>
+          <div class="service-row-title">Highlights & Balayage</div>
+          <div class="service-row-desc">Hand-painted highlights and seamless balayage for natural, sun-kissed depth.</div>
+          <div class="service-row-action">
+            <span>View Service</span>
+            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+
+        <div class="service-row" data-preview="https://images.unsplash.com/photo-1560869713-7d0a29430803?q=80&w=800&auto=format&fit=crop">
+          <div class="service-row-num">04</div>
+          <div class="service-row-title">Hair Treatments</div>
+          <div class="service-row-desc">Repair, strengthen and restore shine with our tailored in-salon treatments.</div>
+          <div class="service-row-action">
+            <span>Book Now</span>
+            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+
+        <div class="service-row" data-preview="https://images.unsplash.com/photo-1562322140-8baeececf3df?q=80&w=800&auto=format&fit=crop">
+          <div class="service-row-num">05</div>
+          <div class="service-row-title">Bridal / Occasion</div>
+          <div class="service-row-desc">Elegant updos and occasion styling that last from ceremony to last dance.</div>
+          <div class="service-row-action">
+            <span>View Service</span>
+            <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Floating image preview -->
+    <div class="service-preview" id="servicePreview">
+      <img src="" alt="Service preview" id="previewImg">
+    </div>
+  </section>
+
+  <!-- WHY LUZH -->
+  <section class="why-luzh container">
+    <div class="why-top">
+      <div>
+        <div class="section-tag">Why LUZH</div>
+        <h2>Trusted, personalised, <em>transformed.</em></h2>
+      </div>
+      <p>Four reasons clients return to LUZH for every transformation — and recommend us to everyone they know.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-item reveal">
+        <div class="number">01</div>
+        <h4>Professional stylists</h4>
+        <p>Senior team trained in editorial and precision techniques.</p>
+      </div>
+      <div class="why-item reveal">
+        <div class="number">02</div>
+        <h4>Personalised consultations</h4>
+        <p>Every appointment starts with a detailed one-on-one consultation.</p>
+      </div>
+      <div class="why-item reveal">
+        <div class="number">03</div>
+        <h4>Quality products</h4>
+        <p>We use premium, salon-exclusive lines that protect and nourish.</p>
+      </div>
+      <div class="why-item reveal">
+        <div class="number">04</div>
+        <h4>Transformation-focused</h4>
+        <p>We don't just style — we create looks that grow out beautifully.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSTAGRAM SECTION -->
+  <section class="insta-section container">
+    <div class="insta-header">
+      <h2>See the latest from LUZH</h2>
+      <a href="#" class="insta-btn">@luzhunisexsalons</a>
+    </div>
+    <div class="insta-grid">
+      <div class="insta-item reveal"><img src="https://images.unsplash.com/photo-1605497788044-5a32c7078486?q=80&w=1974&auto=format&fit=crop" alt="salon work"></div>
+      <div class="insta-item reveal"><img src="https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?q=80&w=1974&auto=format&fit=crop" alt="hair detail"></div>
+      <div class="insta-item reveal"><img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=2069&auto=format&fit=crop" alt="colour melt"></div>
+      <div class="insta-item reveal"><img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?q=80&w=2069&auto=format&fit=crop" alt="updo"></div>
+      <div class="insta-item reveal"><img src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?q=80&w=2069&auto=format&fit=crop" alt="balayage"></div>
+      <div class="insta-item reveal"><img src="https://images.unsplash.com/photo-1560869713-7d0a29430803?q=80&w=2070&auto=format&fit=crop" alt="glossy waves"></div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials container">
+    <div class="section-tag">Client stories</div>
+    <h2>Kind words</h2>
+    <div class="testimonial-grid">
+      <div class="testimonial-card reveal">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"I've never had a colour melt that looks this natural. The team truly listens — I felt understood from the consultation."</p>
+        <div class="testimonial-name">— Amira K.</div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"My bridal updo lasted 14 hours and still looked fresh. Elegant, secure, and exactly what I envisioned."</p>
+        <div class="testimonial-name">— Sophie L.</div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"Finally found a salon that gets curly hair. The cut transformed my shape — I get compliments daily."</p>
+        <div class="testimonial-name">— Maya R.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOKING CTA -->
+  <section class="booking-cta">
+    <div class="container">
+      <div class="section-tag">Let's begin</div>
+      <h2>Ready for your next<br><em>transformation?</em></h2>
+      <a href="#" class="btn-primary">Book Your Appointment</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer container">
+    <div>© 2025 LUZH Salon. All rights reserved.</div>
+    <div class="footer-links">
+      <a href="#">Instagram</a>
+      <a href="#">Facebook</a>
+      <a href="#">Pinterest</a>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script>
+    // Navbar scroll effect
+    (function() {
+      const navbar = document.getElementById('navbar');
+      const onScroll = () => {
+        if (window.scrollY > 60) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+      };
+      window.addEventListener('scroll', onScroll);
+      onScroll();
+    })();
+
+    // Scroll reveal
+    (function() {
+      const reveals = document.querySelectorAll('.reveal');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+          if (entry.isIntersecting) {
+            setTimeout(() => {
+              entry.target.classList.add('visible');
+            }, index * 70);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+      reveals.forEach(el => observer.observe(el));
+    })();
+
+    // Service preview (desktop hover)
+    (function() {
+      const preview = document.getElementById('servicePreview');
+      const previewImg = document.getElementById('previewImg');
+      const rows = document.querySelectorAll('.service-row');
+
+      if (window.matchMedia('(hover: hover)').matches) {
+        rows.forEach(row => {
+          row.addEventListener('mouseenter', (e) => {
+            const imgSrc = row.getAttribute('data-preview');
+            if (imgSrc) {
+              previewImg.src = imgSrc;
+              preview.classList.add('active');
+            }
+          });
+
+          row.addEventListener('mousemove', (e) => {
+            const x = e.clientX + 30;
+            const y = e.clientY - 180;
+            const maxX = window.innerWidth - 300;
+            const maxY = window.innerHeight - 380;
+
+            preview.style.left = Math.min(x, maxX) + 'px';
+            preview.style.top = Math.max(20, Math.min(y, maxY)) + 'px';
+          });
+
+          row.addEventListener('mouseleave', () => {
+            preview.classList.remove('active');
+          });
+        });
+      }
+    })();
+  </script>
+
+</body>
+</html>
